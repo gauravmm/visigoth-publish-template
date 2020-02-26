@@ -33,7 +33,7 @@
 ## If this is the first event in the timeslot, then print the time
             <th>{% if loop.index == 1 %}{{ timeslot.time }}{% endif %}</th>
 %%          if event.is_meeting:
-            <td>{{ event.host.custom.office }}</td>
+            <td>{{ event.host.custom.location }}</td>
             <td>
               <b class="meeting">Meeting:</b>
 %%              if person.role == "host":

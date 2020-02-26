@@ -10,7 +10,7 @@ DTSTAMP:{{ day.date | replace("-", "") }}T{{ "%02d%02d00"|format(timeslot.hour, 
 DTSTART:{{ day.date | replace("-", "") }}T{{ "%02d%02d00"|format(timeslot.hour, timeslot.minute) }}
 DTEND:{{ day.date | replace("-", "") }}T{{ "%02d%02d00"|format(timeslot.hour, timeslot.minute) }}
 %%          if event.is_meeting:
-LOCATION: {{ event.host.data.office }}
+LOCATION: {{ event.host.data.location }}
 %%              if person.role == "host":
 SUMMARY:Meeting with {% for visitor in event.visitors %}{{ visitor.name }} {% endfor %}
 %%              else
