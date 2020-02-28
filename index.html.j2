@@ -16,9 +16,8 @@
 
     <div class="wrapper main">
 
-    <img src="mllogo.jpg" width="180" height="180" />
-    <h1 class="name">{{ person.name }}</h1>
-
+    <img style="float:right;" src="mllogo.jpg" width="120" height="120" />
+    <h1 style="margin-top: 60px" class="name">{{ person.name }}</h1>
 
 %% for day in schedule:
   <h2><span>Day {{ day.number + 1 }}</span> {{ day.date }}</h2>
