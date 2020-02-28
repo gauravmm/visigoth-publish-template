@@ -10,11 +10,15 @@
   <body>
     <header>
       <div class="wrapper">
-        <span class="schedule">Schedule</span> <h1 class="name">{{ person.name }}</h1>
+        <span class="schedule">Visit Day Schedule</span>
       </div>
     </header>
 
     <div class="wrapper main">
+
+    <img src="mllogo.jpg" width="180" height="180" />
+    <h1 class="name">{{ person.name }}</h1>
+
 
 %% for day in schedule:
   <h2><span>Day {{ day.number + 1 }}</span> {{ day.date }}</h2>
