@@ -20,7 +20,7 @@
     <h1 style="margin-top: 60px" class="name">{{ person.name }}</h1>
 
 %% for day in schedule:
-  <h2><span>Day {{ day.number + 1 }}</span> {{ day.date }}</h2>
+  <h2>{{ day.date }}</h2>
 
   <table>
     <thead><tr><th></th><th>Location</th><th>Name</th></tr></thead>
@@ -42,10 +42,12 @@
 %%              if person.role == "host":
 %%                for visitor in event.visitors:
                     <a href="https://applygrad.cs.cmu.edu/admin/index.php?viewApplication={{ visitor.data.id }}&viewDepartment=2">{{ visitor.name }}</a>
+                    [<a href="{{ visitor.custom.zoom_19 }}">Zoom Mar 19</a>]
+                    [<a href="{{ visitor.custom.zoom_20 }}">Zoom Mar 20</a>]
 %%                endfor
 %%              else:
 %%                if event.host.custom.website:
-                      <a href="{event.host.custom.website}">{{ event.host.name }}</a>
+                      <a href="{{event.host.custom.website}}">{{ event.host.name }}</a>
 %%                else:
                     {{ event.host.name }}
 %%                endif
