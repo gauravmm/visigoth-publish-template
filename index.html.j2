@@ -40,7 +40,7 @@
 %%            if event.host.zoom_link_override:
                 <a href="{{ event.host.zoom_link_override }}">Zoom ({{ event.host.name }})</a>
 %%            else:
-                <a href="{{ event.visitors[0].custom.zoom_link }}">Zoom ({{ event.host.name }})</a>
+                <a href="{{ event.visitors[0].custom.zoom_link }}">Zoom ({{ event.visitors[0].name }})</a>
 %%            endif
             </td>
             <td>
