@@ -38,9 +38,9 @@
 %%          if event.is_meeting:
             <td>
 %%            if event.host.zoom_link_override:
-                <a href="{{ event.host.zoom_link_override }}">Zoom ({{ event.host.name }})</a>
+                <a href="{{ event.host.zoom_link_override }}">Zoom [{{ event.host.name }}]</a>
 %%            else:
-                <a href="{{ event.visitors[0].custom.zoom_link }}">Zoom ({{ event.visitors[0].name }})</a>
+                <a href="{{ event.visitors[0].custom.zoom_link }}">Zoom [{{ event.visitors[0].name }}]</a>
 %%            endif
             </td>
             <td>
@@ -60,7 +60,7 @@
 %%               endif
               </td>
 %%           else:
-              <td><a href="{{ event.location }}">Click Here</a></td>
+              <td><a href="{{ event.location }}">Event Broadcast</a></td>
               <td>{{ event.name }}</td>
 %%           endif
           </tr>
