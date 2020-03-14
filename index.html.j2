@@ -36,14 +36,18 @@
 ## If this is the first event in the timeslot, then print the time
             <th>{% if loop.index == 1 %}{{ timeslot.time }}{% endif %}</th>
 %%          if event.is_meeting:
-            <td>{{ event.host.custom.office }}</td>
+            <td>
+%%            if event.host.zoom_link_override:
+                <a href="{{ event.host.zoom_link_override }}">Zoom ({{ event.host.name }})</a>
+%%            else:
+                <a href="{{ visitors[0].custom.zoom_link }}">Zoom ({{ event.host.name }})</a>
+%%            endif
+            </td>
             <td>
               <b class="meeting">Meeting:</b>
 %%              if person.role == "host":
 %%                for visitor in event.visitors:
                     <a href="https://applygrad.cs.cmu.edu/admin/index.php?viewApplication={{ visitor.data.id }}&viewDepartment=2">{{ visitor.name }}</a>
-                    [<a href="{{ visitor.custom.zoom_19 }}">Zoom Mar 19</a>]
-                    [<a href="{{ visitor.custom.zoom_20 }}">Zoom Mar 20</a>]
 %%                endfor
 %%              else:
 %%                if event.host.custom.website:
