@@ -37,7 +37,7 @@
             <th>{% if loop.index == 1 %}{{ timeslot.time }}{% endif %}</th>
 %%          if event.is_meeting:
             <td>
-              <a href="{{ event.host.zoom_link_override }}">Zoom [{{ event.host.name }}]</a>
+              <a href="{{ event.host.custom.zoom_link_override }}">Zoom [{{ event.host.name }}]</a>
             </td>
             <td>
               <b class="meeting">Meeting:</b>
