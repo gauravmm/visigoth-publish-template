@@ -44,7 +44,7 @@
 %%              if person.role == "host":
 %%                for visitor in event.visitors:
                     <a href="https://applygrad.cs.cmu.edu/admin/index.php?viewApplication={{ visitor.data.id }}&viewDepartment=26">{{ visitor.name }}
-                      {% if visitor.custom.phone %}{% (Tel: {{ visitor.custom.phone }}) %}{% endif %}
+                      {% if visitor.custom.phone %}{{ (Tel: {{ visitor.custom.phone }}) }}{% endif %}
                     </a>
 %%                endfor
 %%              else:
