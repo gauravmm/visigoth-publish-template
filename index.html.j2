@@ -43,7 +43,9 @@
               <b class="meeting">Meeting:</b>
 %%              if person.role == "host":
 %%                for visitor in event.visitors:
-                    <a href="https://applygrad.cs.cmu.edu/admin/index.php?viewApplication={{ visitor.data.id }}&viewDepartment=1">{{ visitor.name }}</a>
+                    <a href="https://applygrad.cs.cmu.edu/admin/index.php?viewApplication={{ visitor.data.id }}&viewDepartment=26">{{ visitor.name }}
+                      {% if visitor.custom.phone %}{% (Tel: {{ visitor.custom.phone }}) %}{% endif %}
+                    </a>
 %%                endfor
 %%              else:
 %%                if event.host.custom.website:
@@ -64,16 +66,6 @@
 %%     endfor
     </tbody></table>
 %% endfor
-
-## Print unsatisfied meeting excuses, if this is the schedule for a student.
-%% if (person.role == "visitor") and (unsatisfied_requests | length > 0)
-    <h3>Unsatisfied meeting requests:</h3>
-    <ul class='unsat'>
-%%   for unsat_person in unsatisfied_requests
-      <li>{{ unsat_person.name }} <span>{{ unsat_person.custom.excuse }}</span></li>
-%%   endfor
-    </ul>
-%% endif
 
     </div>
 
