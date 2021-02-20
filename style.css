@@ -21,6 +21,13 @@ table {
     border-collapse: separate;
 }
 
+a {
+    color: #663333;
+}
+a:visited {
+    color: #663366;
+}
+
 /*
     Styling
 */
@@ -128,7 +135,7 @@ footer a {
     }
 
     body {
-        background-color: #E6E6CC;
+        background-color: #F6F6EE;
         background-image: url(bkg.svg);
     }
 }
