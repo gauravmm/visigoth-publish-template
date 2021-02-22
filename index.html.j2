@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Schedule for {{ person.name }}</title>
+    <title>Schedule for {{ person.custom.display_name }}</title>
     <link rel="stylesheet" href="style.css" media="screen">
     <link rel="stylesheet" href="print.css" media="print">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
@@ -17,7 +17,7 @@
     <div class="wrapper main">
 
     <img style="float:right;" src="mllogo.jpg" width="120" height="120" />
-    <h1 style="margin-top: 60px" class="name">{{ person.name }}</h1>
+    <h1 style="margin-top: 60px" class="name">{{ person.custom.display_name }}</h1>
 
 %% for day in schedule:
   <h2>{{ day.date }}</h2>
@@ -37,31 +37,26 @@
             <th>{% if loop.index == 1 %}{{ timeslot.time }}{% endif %}</th>
 %%          if event.is_meeting:
             <td>
-%%          if day.number == 1:
-              <a href="{{ event.host.custom.zoom_mar_19 }}">Zoom [{{ event.host.name }}], Mar 19</a>
-%%          else:
-              <a href="{{ event.host.custom.zoom_mar_20 }}">Zoom [{{ event.host.name }}], Mar 20</a>
-%%          endif
-
+              <a href="{{ event.host.custom.zoom_link }}">Zoom Link</a>
             </td>
             <td>
               <b class="meeting">Meeting:</b>
 %%              if person.role == "host":
 %%                for visitor in event.visitors:
-                    <a href="https://applygrad.cs.cmu.edu/admin/index.php?viewApplication={{ visitor.data.id }}&viewDepartment=2">{{ visitor.name }}</a>
+                    <a href="https://applygrad.cs.cmu.edu/admin/index.php?viewApplication={{ visitor.custom.admit_id }}&viewDepartment=2">{{ visitor.custom.display_name }}</a>
 %%                endfor
 %%              else:
 %%                if event.host.custom.website:
-                      <a href="{{event.host.custom.website}}">{{ event.host.name }}</a>
+                      <a href="{{event.host.custom.website}}">{{ event.host.custom.display_name }}</a>
 %%                else:
-                    {{ event.host.name }}
+                    {{ event.host.custom.display_name }}
 %%                endif
 ## If the meeting is combined, mention that but don't include the name of the other user
                   {% if event.visitors | length > 1 %}(combined meeting){% endif %}
 %%               endif
               </td>
 %%           else:
-              <td><a href="{{ event.location }}">Event Broadcast</a></td>
+              <td><a href="{{ event.location }}">Event Link</a></td>
               <td>{{ event.name }}</td>
 %%           endif
           </tr>
@@ -74,14 +69,14 @@
 %% if (person.role == "visitor") and (unsatisfied_requests | length > 0)
     <h3>Unsatisfied meeting requests:</h3>
     <ul class='unsat'>
-%%   for unsat_person in unsatisfied_requests
-      <li>{{ unsat_person.name }} <span>{{ unsat_person.custom.excuse }}</span></li>
+%%  for unsat_person in unsatisfied_requests
+      <li>{{ unsat_person.custom.display_name }} <span>
+%%    if unsat_person.custom.excuse:
+        {{ unsat_person.custom.excuse }}
+%%    endif
+      </span></li>
 %%   endfor
     </ul>
-%% endif
-
-%% if person.role == "host":
-<p>All faculty talks are broadcast live from GHC 6115.</p>
 %% endif
 
     </div>
