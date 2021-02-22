@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Schedule for {{ person.name }}</title>
+    <title>Schedule for {{ person.data.name }}</title>
     <link rel="stylesheet" href="style.css" media="screen">
     <link rel="stylesheet" href="print.css" media="print">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
@@ -10,7 +10,7 @@
   <body>
     <header>
       <div class="wrapper">
-        <span class="schedule">Schedule</span> <h1 class="name">{{ person.name }}</h1>
+        <span class="schedule">Schedule</span> <h1 class="name">{{ person.data.name }}</h1>
       </div>
     </header>
 
@@ -43,15 +43,15 @@
               <b class="meeting">Meeting:</b>
 %%              if person.role == "host":
 %%                for visitor in event.visitors:
-                    <a href="https://applygrad.cs.cmu.edu/admin/index.php?viewApplication={{ visitor.data.id }}&viewDepartment=26">{{ visitor.name }}
+                    <a href="https://applygrad.cs.cmu.edu/admin/index.php?viewApplication={{ visitor.custom.applygrad }}&viewDepartment={{ visitor.custom.department }}">{{ visitor.data.name }}
                       {% if visitor.custom.phone %}(Tel: {{ visitor.custom.phone }}){% endif %}
                     </a>
 %%                endfor
 %%              else:
 %%                if event.host.custom.website:
-                      <a href="{{event.host.custom.website}}">{{ event.host.name }}</a>
+                      <a href="{{event.host.custom.website}}">{{ event.host.data.name }}</a>
 %%                else:
-                    {{ event.host.name }}
+                    {{ event.host.data.name }}
 %%                endif
 ## If the meeting is combined, mention that but don't include the name of the other user
                   {% if event.visitors | length > 1 %}(combined meeting){% endif %}
