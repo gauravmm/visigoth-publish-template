@@ -33,7 +33,7 @@
 ## If this is the first event in the timeslot, then print the time
             <th>{% if loop.index == 1 %}{{ timeslot.time }}{% endif %}</th>
 %%          if event.is_meeting:
-            <td>{{ event.host.custom.location }}</td>
+            <td><a href="{{ event.host.custom.zoom_link }}">Zoom &#x1F517;</a></td>
             <td>
               <b class="meeting">Meeting:</b>
 %%              if person.role == "host":
@@ -51,7 +51,7 @@
 %%               endif
               </td>
 %%           else:
-              <td>{{ event.location }}</td>
+              <td><a href="{{ event.location }}">Link &#x1F517;</a></td>
               <td>{{ event.name }}</td>
 %%           endif
           </tr>
@@ -70,10 +70,7 @@
     </ul>
 %% endif
 
-<p>
-Note that all meetings are 25 minutes long, with the remaining 5 minutes of each timeslot reserved for travel to your next event or meeting.
-</p>
-    </div>
+</div>
 
     <footer>
         <div class="visigoth">Visigoth</div>
