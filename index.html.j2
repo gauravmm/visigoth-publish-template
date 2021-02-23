@@ -70,8 +70,8 @@
 
 ## Print unsatisfied meeting excuses, if this is the schedule for a student.
 %% if (person.role == "visitor") and (unsatisfied_requests | length > 0)
-    <div class="wrapper main" style="margin-top: 30px;">
-    <h3>Other meeting requests:</h3>
+    <div class="wrapper main" style="margin-top: 30px; padding-top: 8px;">
+    <h2>Unmet requests:</h2>
     <ul class='unsat'>
 %%   for unsat_person in unsatisfied_requests
       <li>{{ unsat_person.name }} <span>{{ unsat_person.custom.excuse }}</span></li>
