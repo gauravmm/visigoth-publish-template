@@ -16,44 +16,41 @@
 
     <div class="wrapper main">
 
-%% for day in schedule:
-  <h2><span>Day {{ day.number + 1 }}</span> {{ day.date }}</h2>
-
   <table>
-    <thead><tr><th></th><th>Location</th><th>Name</th></tr></thead>
+    <thead><tr><th></th><th></th><th>Location</th><th>Name</th></tr></thead>
     <tbody>
+
+%% for day in schedule:
+  {% set ns = namespace(start_day=true) %}
+
+  {% set day_loop = loop %}
 %%  for timeslot in day.timeslots:
-    {% if timeslot.minute == 0 %}{% set time_class = "hour-start" %}{% endif %}
-    {% if timeslot.hour % 2 == 0 and timeslot.minute == 0 %}{% set time_class = "timeblock-start hour-start" %}{% endif %}
-%%    if (timeslot.events + timeslot.meetings) | length == 0:
-        <tr class="{{time_class}}"><th>{{ timeslot.time }}</th><td></td><td></td></tr>
-%%    endif
+  {% set ts_loop = loop %}
 %%    for event in (timeslot.meetings + timeslot.events):
-        <tr class="{% if loop.index == 1 %}{{time_class}}{% endif %}">
+
 ## If this is the first event in the timeslot, then print the time
-            <th>{% if loop.index == 1 %}{{ timeslot.time }}{% endif %}</th>
+%%      if ns.start_day:
+%%        set ns.start_day = false
+          <tr class="day-start"><th>{{ day.date }}</th>
+%%      else:
+          <tr><th></th>
+%%      endif
+
+        <th>{{ timeslot.time }}</th>
+
 %%          if event.is_meeting:
             <td><a href="{{ event.host.custom.zoom_link }}">Zoom &#x1F517;</a></td>
             <td>
               <b class="meeting">Meeting:</b>
 %%              if person.role == "host":
 %%                for visitor in event.visitors:
-                    <a href="https://applygrad.cs.cmu.edu/admin/index.php?viewApplication={{ visitor.data.id }}&viewDepartment=1">{{ visitor.name }}</a>
+                    <a href="{{ visitor.custom }}">{{ visitor.name }}</a>
 %%                endfor
 %%              else:
-%%                if event.host.custom.website:
-                      <a href="{{event.host.custom.website}}">{{ event.host.name }}</a>
-%%                else:
                     {{ event.host.name }}
-%%                endif
 ## If the meeting is combined, mention that but don't include the name of the other user
                   {% if event.visitors | length > 1 %}(combined meeting){% endif %}
 %%               endif
-
-%%                if event.host.custom.zoom_password:
-                      (Zoom Password: <span class="zoom-pwd">{{ event.host.custom.zoom_password }}</span>)
-%%                endif
-
               </td>
 %%           else:
               <td><a href="{{ event.location }}">Link &#x1F517;</a></td>
@@ -62,18 +59,8 @@
           </tr>
 %%       endfor
 %%     endfor
-    </tbody></table>
 %% endfor
-
-## Print unsatisfied meeting excuses, if this is the schedule for a student.
-%% if (person.role == "visitor") and (unsatisfied_requests | length > 0)
-    <h3>Unsatisfied meeting requests:</h3>
-    <ul class='unsat'>
-%%   for unsat_person in unsatisfied_requests
-      <li>{{ unsat_person.name }} <span>{{ unsat_person.custom.excuse }}</span></li>
-%%   endfor
-    </ul>
-%% endif
+    </tbody></table>
 
 </div>
 
