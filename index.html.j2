@@ -44,7 +44,7 @@
               <b class="meeting">Meeting:</b>
 %%              if person.role == "host":
 %%                for visitor in event.visitors:
-                    <a href="{{ visitor.custom }}">{{ visitor.name }}</a>
+                    <a href="{{ visitor.custom.slate_link }}">{{ visitor.name }}</a>
 %%                endfor
 %%              else:
                     {{ event.host.name }}
