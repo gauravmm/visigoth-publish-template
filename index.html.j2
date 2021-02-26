@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="style.css" media="screen">
     <link rel="stylesheet" href="print.css" media="print">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab&display=swap" rel="stylesheet"> 
   </head>
   <body>
     <header>
@@ -15,6 +17,10 @@
     </header>
 
     <div class="wrapper main">
+
+    <div style="height:100px; margin: 0 -8px; padding: 20px 8px 16px; background-color:#003057;">
+      <img src="./gt-logo-gold.png" height="100" width="236" style="float:right;" />
+    </div>
 
 %% for day in schedule:
   <h2><span>Day {{ day.number + 1 }}</span> {{ day.date }}</h2>
@@ -35,13 +41,13 @@
             <th>{% if loop.index == 1 %}{{ timeslot.time }}{% endif %}</th>
 %%          if event.is_meeting:
             <td>
-              <a href="{{ event.host.custom.zoom_link }}">Zoom &#x1f517;</a>
+              <a href="{{ event.host.custom.room_link }}">Room &#x1f517;</a>
             </td>
             <td>
               <b class="meeting">Meeting:</b>
 %%              if person.role == "host":
 %%                for visitor in event.visitors:
-                    <a href="https://applygrad.cs.cmu.edu/admin/index.php?viewApplication={{ visitor.custom.app_id }}&viewDepartment=3">{{ visitor.name }}</a>
+                    {{ visitor.name }}
 %%                endfor
 %%              else:
                   {{ event.host.name }}
@@ -58,19 +64,6 @@
 %%     endfor
     </tbody></table>
 %% endfor
-<p>
-*The password for the open house page is: <code>phdopenhouse2021</code>
-</p>
-
-## Print unsatisfied meeting excuses, if this is the schedule for a student.
-%% if (person.role == "visitor") and (unsatisfied_requests | length > 0)
-    <h3>Unsatisfied meeting requests:</h3>
-    <ul class='unsat'>
-%%   for unsat_person in unsatisfied_requests
-      <li>{{ unsat_person.name }} <span>{{ unsat_person.custom.excuse }}</span></li>
-%%   endfor
-    </ul>
-%% endif
 
     </div>
 
