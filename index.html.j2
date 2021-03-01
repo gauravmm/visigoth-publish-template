@@ -66,6 +66,12 @@
   <p>GatherTown password is <pre>ThisIsNotAPasssword</pre></p>
 
 ## Print unsatisfied meeting excuses, if this is the schedule for a student.
+%% if (person.role == "visitor") and person.custom.sched_mgs
+  <p><b>Note:</b> {{ person.custom.sched_mgs }}</p>
+%% endif
+
+
+## Print unsatisfied meeting excuses, if this is the schedule for a student.
 %% if (person.role == "visitor") and (unsatisfied_requests | length > 0)
     <h3>Unsatisfied meeting requests:</h3>
     <ul class='unsat'>
