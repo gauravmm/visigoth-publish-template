@@ -16,6 +16,10 @@
 
     <div class="wrapper main">
 
+    <div style="height:80px; padding-top:20px;">
+      <img src="./cee.png" width="326" height="50" style="float:right;" />
+    </div>
+
 %% for day in schedule:
   <h2><span>Day {{ day.number + 1 }}</span> {{ day.date }}</h2>
 
@@ -23,6 +27,7 @@
     <thead><tr><th></th><th>Location</th><th>Name</th></tr></thead>
     <tbody>
 %%  for timeslot in day.timeslots:
+%%    set time_class = ""
     {% if timeslot.minute == 0 %}{% set time_class = "hour-start" %}{% endif %}
     {% if timeslot.hour % 2 == 0 and timeslot.minute == 0 %}{% set time_class = "timeblock-start hour-start" %}{% endif %}
 %%    if (timeslot.events + timeslot.meetings) | length == 0:
@@ -33,25 +38,23 @@
 ## If this is the first event in the timeslot, then print the time
             <th>{% if loop.index == 1 %}{{ timeslot.time }}{% endif %}</th>
 %%          if event.is_meeting:
-            <td>{{ event.host.custom.office }}</td>
+            <td>
+              <a href="{{ event.host.custom.zoom_link }}">Zoom &#x1f517;</a>
+            </td>
             <td>
               <b class="meeting">Meeting:</b>
 %%              if person.role == "host":
 %%                for visitor in event.visitors:
-                    <a href="https://applygrad.cs.cmu.edu/admin/index.php?viewApplication={{ visitor.data.id }}&viewDepartment=1">{{ visitor.name }}</a>
+                    <a href="https://applygrad.cs.cmu.edu/admin/index.php?viewApplication={{ visitor.custom.app_id }}&viewDepartment=3">{{ visitor.name }}</a>
 %%                endfor
 %%              else:
-%%                if event.host.custom.website:
-                      <a href="{{event.host.custom.website}}">{{ event.host.name }}</a>
-%%                else:
-                    {{ event.host.name }}
-%%                endif
+                  {{ event.host.name }}
 ## If the meeting is combined, mention that but don't include the name of the other user
                   {% if event.visitors | length > 1 %}(combined meeting){% endif %}
-%%               endif
+%%              endif
               </td>
 %%           else:
-              <td>{{ event.location }}</td>
+              <td><a href="{{ event.location }}">Link</a></td>
               <td>{{ event.name }}</td>
 %%           endif
           </tr>
@@ -65,7 +68,7 @@
     <h3>Unsatisfied meeting requests:</h3>
     <ul class='unsat'>
 %%   for unsat_person in unsatisfied_requests
-      <li>{{ unsat_person.name }} <span>{{ unsat_person.custom.excuse }}</span></li>
+      <li><b>{{ unsat_person.name }}</b> <span>{{ unsat_person.custom.excuse }}</span></li>
 %%   endfor
     </ul>
 %% endif
