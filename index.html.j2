@@ -54,7 +54,14 @@
 %%              endif
               </td>
 %%           else:
-              <td><a href="{{ event.location }}">Link</a></td>
+              <td>
+%%              if event.location | trim | length == 0
+##                Do nothing.
+%%              elif event.location.startswith("http")
+                  <a href="{{ event.location }}">Link</a></td>
+%%              else
+                  {{ event.location }}
+%%              endif
               <td>{{ event.name }}</td>
 %%           endif
           </tr>
