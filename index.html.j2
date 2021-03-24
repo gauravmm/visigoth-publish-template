@@ -76,13 +76,14 @@
 
 ## Print unsatisfied meeting excuses, if this is the schedule for a student.
 %% if (person.role == "visitor") and (unsatisfied_requests | length > 0)
-    <h3>Unsatisfied meeting requests:</h3>
+<p style="margin-top:40px;">
     Unfortunately, due to scheduling constraints, we were not able to meet these requests. Feel free to reach out to these faculty members and set up a meeting:
     <ul class='unsat'>
 %%  for unsat_person in unsatisfied_requests
       <li><b>{{ unsat_person.data.name }}</b> <a href="mailto:{{ unsat_person.data.email }}"><code>{{ unsat_person.data.email }}</code></a></li>
 %%   endfor
     </ul>
+</p>
 %% endif
 
     </div>
