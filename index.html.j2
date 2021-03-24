@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Schedule for {{ person.custom.display_name }}</title>
+    <title>Schedule for {{ person.data.name }}</title>
     <link rel="stylesheet" href="style.css" media="screen">
     <link rel="stylesheet" href="print.css" media="print">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
@@ -10,27 +10,31 @@
   <body>
     <header>
       <div class="wrapper">
-        <span class="schedule">Visit Day Schedule</span>
+        <span class="schedule">Visit Day Schedule for <b>{{ person.data.name }}</b></span>
       </div>
     </header>
 
     <div class="wrapper main">
 
+    <!--
     <div style="height:32px; border: thick solid #FC3; margin: 16px auto; background: #EEE; box-shadow: 0 2px 4px rgba(0,0,0,.5);">
         <img src="./alert.svg" style="float:left;padding: 4px 12px 4px  8px;" width="24" height="24">
-        <div style="padding: 8px 12px;">All talks and meetings will be in <a href="https://time.is/ET" rel="noopener" target="_blank">Eastern Time</a></div>
+        <div style="padding: 8px 12px;">All talks and meetings will be in <a href="https://time.is/PT" rel="noopener" target="_blank">Pacific Time</a></div>
     </div>
+    -->
 
-    <img style="float:right;" src="mllogo.jpg" width="120" height="120" />
-    <h1 style="margin-top: 60px" class="name">{{ person.custom.display_name }}</h1>
+    <div style="margin: 32px 8px 32px 32px; height:50px">
+      <img src="econ.svg" width="436" height="60" style="float:right;" />
+    </div>
 
 %% for day in schedule:
   <h2>{{ day.date }}</h2>
 
   <table>
-    <thead><tr><th></th><th>Location</th><th>Name</th></tr></thead>
+    <thead><tr><th><a href="https://time.is/PT" rel="noopener" target="_blank">Pacific Time</a></th><th>Location</th><th>Name</th></tr></thead>
     <tbody>
 %%  for timeslot in day.timeslots:
+    {% set time_class = "" %}
     {% if timeslot.minute == 0 %}{% set time_class = "hour-start" %}{% endif %}
     {% if timeslot.hour % 2 == 0 and timeslot.minute == 0 %}{% set time_class = "timeblock-start hour-start" %}{% endif %}
 %%    if (timeslot.events + timeslot.meetings) | length == 0:
@@ -48,13 +52,13 @@
               <b class="meeting">Meeting:</b>
 %%              if person.role == "host":
 %%                for visitor in event.visitors:
-                    <a href="https://applygrad.cs.cmu.edu/admin/index.php?viewApplication={{ visitor.custom.admit_id }}&viewDepartment=2">{{ visitor.custom.display_name }}</a>
+                    <a href="#">{{ visitor.data.name }}</a>
 %%                endfor
 %%              else:
 %%                if event.host.custom.website:
-                      <a href="{{event.host.custom.website}}">{{ event.host.custom.display_name }}</a>
+                      <a href="{{event.host.custom.website}}">{{ event.host.data.name }}</a>
 %%                else:
-                    {{ event.host.custom.display_name }}
+                    {{ event.host.data.name }}
 %%                endif
 ## If the meeting is combined, mention that but don't include the name of the other user
                   {% if event.visitors | length > 1 %}(combined meeting){% endif %}
@@ -75,7 +79,7 @@
     <h3>Unsatisfied meeting requests:</h3>
     <ul class='unsat'>
 %%  for unsat_person in unsatisfied_requests
-      <li>{{ unsat_person.custom.display_name }} <span>
+      <li>{{ unsat_person.data.name }} <span>
 %%    if unsat_person.custom.excuse:
         {{ unsat_person.custom.excuse }}
 %%    endif
