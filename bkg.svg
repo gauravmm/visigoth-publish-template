@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="721pt" height="721pt" version="1.2" viewBox="0 0 721 721" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<svg width="360pt" height="360pt" version="1.2" viewBox="0 0 721 721" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
  <metadata>
   <rdf:RDF>
    <cc:Work rdf:about="">
@@ -9,8 +9,8 @@
    </cc:Work>
   </rdf:RDF>
  </metadata>
- <rect width="721" height="721" fill="#c2b9a7" stroke-width=".61243"/>
- <g transform="translate(-257.73 -35.5)" fill="none" stroke="#fff" stroke-linejoin="round" stroke-opacity=".3" stroke-width=".99975">
+ <rect width="721" height="721" fill="#c2b9a7" stroke-width=".0"/>
+ <g transform="translate(-257.73 -35.5)" fill="none" opacity=".4" stroke="#fff" stroke-linejoin="round" stroke-width="1.">
   <path transform="matrix(1 0 0 -1 375.23 756)" d="m-0.0014312 0 18 45 18-45z"/>
   <path transform="matrix(1 0 0 -1 411.23 666)" d="m-0.0014312 0-18-45-18 45z"/>
   <path transform="matrix(1 0 0 -1 348.23 729)" d="m-0.0014312 0 45 18-18-45z"/>
