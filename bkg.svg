@@ -10,7 +10,7 @@
   </rdf:RDF>
  </metadata>
  <rect width="721" height="721" fill="#c2b9a7" stroke-width=".61243"/>
- <g transform="translate(-257.73 -35.5)" fill="none" stroke="#fff" stroke-linejoin="round" stroke-opacity=".5" stroke-width=".99975">
+ <g transform="translate(-257.73 -35.5)" fill="none" stroke="#fff" stroke-linejoin="round" stroke-opacity=".3" stroke-width=".99975">
   <path transform="matrix(1 0 0 -1 375.23 756)" d="m-0.0014312 0 18 45 18-45z"/>
   <path transform="matrix(1 0 0 -1 411.23 666)" d="m-0.0014312 0-18-45-18 45z"/>
   <path transform="matrix(1 0 0 -1 348.23 729)" d="m-0.0014312 0 45 18-18-45z"/>
